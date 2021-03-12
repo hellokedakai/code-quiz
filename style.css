@@ -1,3 +1,6 @@
+* {
+    font-family: arial;
+}
 
 header {
     display: flex;
@@ -8,11 +11,22 @@ header {
 main{
     display: flex;
     flex-direction: column;
+    align-self: center;
     align-items: center;
+    justify-content: center;
+    padding: 0 15% 5% 15%;
 }
 
 body {
     background-color:white;
+}
+
+#highscores {
+    color: violet;
+}
+
+#start-button-container {
+    margin-bottom: 20%;
 }
  
 .grid {
@@ -26,7 +40,6 @@ body {
 }
  
 .grid h1 {
-    font-family: "sans-serif";
     background-color: #01BBFF;
     font-size: 60px;
     text-align: center;
@@ -46,14 +59,14 @@ body {
     font-size: 30px;
     color: black;
 }
- 
-.buttons {
+
+#buttons {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
 }
  
-#btn0, #btn1, #btn2, #btn3 {
+#btn0, #btn1, #btn2, #btn3, #startB {
     background-color: indigo;
     width: 250px;
     font-size: 20px;
@@ -63,16 +76,27 @@ body {
     border-radius: 5px;
 }
  
-#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover {
+#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover, #startB:hover {
     cursor: pointer;
     background-color:plum;
 }
  
-#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus {
+#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus, #startB:focus {
     outline: 0;
 }
  
 #progress {
-    color: #2b2b2b;
+    color:grey;
     font-size: 18px;
+}
+
+#footer {
+    margin: 10% 0;
+    padding: 0 50%;
+    border-top: 2px solid grey;
+    visibility: hidden;
+}
+
+#progress {
+    text-align: start;
 }

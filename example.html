@@ -1,0 +1,52 @@
+<quizscreen>
+    <header class="top-row">
+        <div id="highscores">
+            View high scores
+        </div>
+        <div id="time">Time: 100</div>
+    </header>
+    <div>
+        <h1 id="question"></h1>
+        <div class="buttons">
+            <button id="btn0"><span id="choice0"></span></button>
+            <button id="btn1"><span id="choice1"></span></button>
+            <button id="btn2"><span id="choice2"></span></button>
+            <button id="btn3"><span id="choice3"></span></button>
+        </div>
+    </div>
+    <footer id="footer">
+        <p id="progress"></p>
+    </footer>
+<quizscreen>
+
+
+    function showtime() {
+        var timeleft = displaytime.innerHTML.replace('Time: ','Time: ' + counter);
+        document.getElementById("time").appendChild(timeleft);
+    }
+
+    function startcount() {
+        timer = window.setTimeout("countdown()",1000);
+        // console.log("countdown starts!");
+    }
+
+    function countdown() {
+        counter = counter - 1;
+        // console.log(counter);
+        if (counter === 0){
+            window.clearTimeout(timer);
+            timer= null;
+        }
+        else{
+            timer=window.setTimeout("countdown()",1000);
+            showtime();
+        }
+    }
+
+
+
+function showProgress() {
+    var currentQuestionNumber = quiz.questionIndex + 1;
+    var element = document.getElementById("progress");
+    element.innerHTML = "Question " + currentQuestionNumber + " of " + quiz.questions.length;
+};
