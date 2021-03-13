@@ -1,5 +1,5 @@
 var timer;
-var counter = 100;
+var counter = 5;
 var countdownId = 0;
 var progress = document.getElementById("progress");
 var footer = document.getElementById("footer");
@@ -18,57 +18,62 @@ function countdown() {
         counter = counter - 1;
         document.getElementById("time").innerHTML = "Time: " + counter;
     }
-    else{
-        clearInterval(countdown);
+    else {
+        // clearInterval(countdown);
         document.getElementById("time").innerHTML = "GAME OVER";
         showScores();
     }
 }
 
+// function stopcount() {
+//     clearInterval(countdown);
+//     document.getElementById("time").innerHTML = "GAME OVER";
+// }
+
 
 
 //SET UP QUIZ STUFF
-    function Quiz(questions) {
-        this.score = 0;
-        this.questions = questions;
-        this.questionIndex = 0;
+function Quiz(questions) {
+    this.score = 0;
+    this.questions = questions;
+    this.questionIndex = 0;
+}
+
+//add methods to Quiz by using prototype property 
+Quiz.prototype.getQuestionIndex = function() {
+    return this.questions[this.questionIndex];
+}
+
+Quiz.prototype.guess = function(answer) {
+    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
+        this.score = this.score + 10;
+        footer.style.visibility = "visible";
+        progress.innerHTML = "Correct!";
+    } else {
+        this.score = this.score - 10;
+        counter = counter - 10;
+        footer.style.visibility = "visible";
+        progress.innerHTML = "Wrong!"
     }
 
-    //add methods to Quiz by using prototype property 
-    Quiz.prototype.getQuestionIndex = function() {
-        return this.questions[this.questionIndex];
-    }
-    
-    Quiz.prototype.guess = function(answer) {
-        if(this.getQuestionIndex().isCorrectAnswer(answer)) {
-            this.score = this.score + 10;
-            footer.style.visibility = "visible";
-            progress.innerHTML = "Correct!";
-        } else {
-            this.score = this.score - 10;
-            counter = counter - 10;
-            footer.style.visibility = "visible";
-            progress.innerHTML = "Wrong!"
-        }
-    
-        this.questionIndex++;
+    this.questionIndex++;
 
-    }
-    
-    Quiz.prototype.isEnded = function() {
-        return this.questionIndex === this.questions.length;
-    }
-    
-    //This is an object constructor
-    function Question(text, choices, answer) {
-        this.text = text;
-        this.choices = choices;
-        this.answer = answer;
-    }
-    
-    Question.prototype.isCorrectAnswer = function(choice) {
-        return this.answer === choice;
-    }
+}
+
+Quiz.prototype.isEnded = function() {
+    return this.questionIndex === this.questions.length;
+}
+
+//This is an object constructor
+function Question(text, choices, answer) {
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer;
+}
+
+Question.prototype.isCorrectAnswer = function(choice) {
+    return this.answer === choice;
+}
 
 //Replace start screen with quiz screen
     function quizstart() {
@@ -119,7 +124,7 @@ function countdown() {
 //Questions
     function populate() {
         if(quiz.isEnded()) {
-            
+            stopcount();
             showScores();
             
         }
