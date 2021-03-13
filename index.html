@@ -23,8 +23,11 @@
             </button>
         </div>
         
-        <input id="form" type="form">
-        <input type="submit">
+        <div id="score-submit">
+            <input type="submit" id="submit" onClick = "saveScore()">
+            <input id="form" type="form" name = "initials">
+            <label for="initials" id="score-label">Enter initials: </label>
+        </div>
 
         <footer id="footer">
             <p id="progress"></p>

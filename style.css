@@ -11,10 +11,32 @@ header {
 main{
     display: flex;
     flex-direction: column;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
     padding: 0 15% 5% 15%;
+}
+
+
+#startH1, #startB, #start-button-container, #startP {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15%;
+}
+
+p {
+    font-size: 16px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: row;
+}
+
+#progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:grey;
+    font-size: 18px;
 }
 
 body {
@@ -25,8 +47,14 @@ body {
     color: violet;
 }
 
+#score-p {
+    font-style: unset;
+}
+
 #start-button-container {
     margin-bottom: 20%;
+    display: flex;
+    align-items: center;
 }
  
 .grid {
@@ -49,12 +77,15 @@ body {
 }
  
 #score {
-    color: #01BBFF;
+    display: flex;
+    display: inline-block;
+    text-align: left;
+    /* color: #01BBFF;
     text-align: center;
-    font-size: 30px;
+    font-size: 30px; */
 }
  
-.grid #question {
+#question {
     font-family: "arial";
     font-size: 30px;
     color: black;
@@ -71,32 +102,47 @@ body {
     width: 250px;
     font-size: 20px;
     color: #fff;
-    margin: 10px 40px 10px 0px;
+    margin: 10px 10px 10px 0px;
     padding: 10px 10px;
     border-radius: 5px;
 }
  
-#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover, #startB:hover {
+#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover, #startB:hover, #submit:hover {
     cursor: pointer;
     background-color:plum;
 }
  
-#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus, #startB:focus {
+#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus, #startB:focus, #submit:focus {
     outline: 0;
 }
- 
-#progress {
-    color:grey;
-    font-size: 18px;
-}
+
 
 #footer {
-    margin: 10% 0;
+    margin-top: 10%;
     padding: 0 50%;
     border-top: 2px solid grey;
     visibility: hidden;
 }
 
-#progress {
-    text-align: start;
+#score-submit {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    visibility: hidden;
+}
+
+#submit {
+    background-color: indigo;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 0 0 5px;
+}
+
+#score-label {
+    margin:0 5px 0 0;
+}
+
+#form {
+    max-width: 30%;
 }

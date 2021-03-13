@@ -4,6 +4,7 @@ var countdownId = 0;
 var progress = document.getElementById("progress");
 var footer = document.getElementById("footer");
 var highscores = document.getElementById("highscores");
+var scoreSubmit = document.getElementById("score-submit");
 
 
 //COUNTDOWN
@@ -153,17 +154,46 @@ function showScores() {
         quiz.score = 0;
     }
     //Show results 
-    var gameOverHTML = "<h1>All done!</h1>";
-    gameOverHTML += "<h2 id='score'> Your final score is " + quiz.score + ". </h2>";
-    gameOverHTML += "Enter initials: "
-    var element = document.getElementById("challenge");
-    element.innerHTML = gameOverHTML;
-
-    // var formHTML = "<input type='form'>";
-    // formHTML += "<input type='submit'>";
-    // var form = document.getElementById("form");
-    // form.innerHTML = formHTML;
+    var quizH1 = document.getElementById("question");
+    quizH1.innerHTML = "All done!";
+    var results = document.createElement("P");
+    results.innerHTML= "Your final score is " + quiz.score + ".";
+    results.setAttribute("id","results");
+    quizH1.appendChild(results);
+    document.getElementById("buttons").remove();
+    scoreSubmit.style.visibility = "visible";
 };
+
+function saveScore() {
+    var initials = document.getElementById("form").innerHTML;
+    localStorage.setItem(initials, quiz.score);
+    finalScreen();
+
+}
+
+function finalScreen() {
+    var quizH1 = document.getElementById("question");
+    quizH1.innerHTML = "High scores"
+    
+    var scoreBoard = document.createElement("P");
+    scoreBoard.innerHTML = localStorage.getItem("initials");
+    
+    var main = document.getElementById("challenge");
+    main.appendChild(scoreBoard);
+
+    // var results = document.getElementById("results");
+    // results.style.vsibility = "hidden";
+
+    scoreSubmit.style.visibility = "hidden";
+
+    footer.style.visibility = "hidden";
+
+
+
+    
+
+    
+}
  
 // create questions here
 var questions = [
