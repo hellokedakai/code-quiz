@@ -1,11 +1,12 @@
-var timer;
-var counter = 100;
+var counter = 60;
 var countdownId = 0;
 var progress = document.getElementById("progress");
 var footer = document.getElementById("footer");
 
 var highscores = document.getElementById("highscores");
 highscores.addEventListener("click", finalScreen);
+
+var highScore = localStorage.getItem("highscore");
 
 var scoreSubmit = document.getElementById("score-submit");
 
@@ -30,19 +31,20 @@ function stopcount() {
     clearInterval(countdownId);
 }
 
-//SET UP QUIZ STUFF
+//Set up quiz
 function Quiz(questions) {
     this.score = 0;
     this.questions = questions;
     this.questionIndex = 0;
 }
-//add methods to Quiz by using prototype property 
+
+//add methods to quiz by using prototype property 
 Quiz.prototype.getQuestionIndex = function() {
     return this.questions[this.questionIndex];
 }
 Quiz.prototype.guess = function(answer) {
     if(this.getQuestionIndex().isCorrectAnswer(answer)) {
-        this.score = this.score + 10;
+        this.score = this.score + 20;
         footer.style.visibility = "visible";
         progress.innerHTML = "Correct!";
     } else {
@@ -65,6 +67,7 @@ function Question(text, choices, answer) {
 Question.prototype.isCorrectAnswer = function(choice) {
     return this.answer === choice;
 }
+
 //Replace start screen with quiz screen
 function quizstart() {
     //get startscreen H1
@@ -102,27 +105,20 @@ function quizstart() {
         span.id = "choice" + i;
         button.appendChild(span);
     }
-
-    
-
-
-
     start();
     populate();
 };
  
-//Questions
+// Questions
 function populate() {
     if(quiz.isEnded()) {
         stopcount();
         showScores();
-        
     }
     else {
         // show question
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
-
         // show options
         var choices = quiz.getQuestionIndex().choices;
         for(var i = 0; i < choices.length; i++) {
@@ -130,10 +126,9 @@ function populate() {
             element.innerHTML = choices[i];
             guess("btn" + i, choices[i]);
         }
-
     }
 };
- 
+// get the guess input and move onto next question
 function guess(id, guess) {
     var button = document.getElementById(id);
     button.onclick = function() {
@@ -141,8 +136,7 @@ function guess(id, guess) {
         populate();
     }
 };
- 
- 
+  
 function showScores() {
     //If the quiz score is a negative value, set score to zero.
     if (quiz.score < 0) {
@@ -162,45 +156,80 @@ function showScores() {
 };
 
 function saveScore() {
+    //get value from text field input
     var initials = document.getElementById("initials").value;
-    const highScoreData = {
-        name: initials,
-        score: quiz.score,
+    //if your score is higher, set new highscore
+    if (quiz.score > highScore) {
+        localStorage.setItem("highscore", quiz.score);
+        localStorage.setItem("initials", initials);
     }
-    window.localStorage.setItem('scoredata', JSON.stringify(highScoreData));
-    // localStorage.setItem(initials, quiz.score);
     finalScreen();
 }
 
+//return to home/startscreen
+function goToHomePage() {
+    window.location = '/'; 
+}
 
+//clear highscore when you press the "Clear Highscores" button
+function clearHighScore() {
+    localStorage.clear();
+    var clearBoard = document.getElementById("score-board")
+    clearBoard.innerHTML = "";
 
+}
+
+//Display highscore
 function finalScreen() {
     var mainDiv = document.getElementById("challenge");
     mainDiv.innerHTML = '';
-    // mainDiv.replaceChild(scoreBoard, scoreSubmit);
 
     var highScoreH1 = document.createElement("H1");
-    highScoreH1.innerHTML = "High scores";
+    highScoreH1.innerHTML = "High Score";
     mainDiv.appendChild(highScoreH1);
 
+    if (!highScore) {
+        localStorage.setItem("highscore", "0");
+        localStorage.setItem("initials", "NO HIGHSCORE");
+    }
+
     var scoreBoard = document.createElement("P");
-    scoreBoard.innerHTML = localStorage.getItem("scoredata");
+    scoreBoard.innerHTML = localStorage.getItem("initials") + " " + localStorage.getItem("highscore");
+    scoreBoard.setAttribute("id", "score-board");
     mainDiv.appendChild(scoreBoard);
 
     var header = document.getElementById("top-row");
     header.style.visibility = "hidden";
+
+    var hsButtons = document.createElement("DIV");
+    hsButtons.setAttribute("id", "hsButtonContainer");
+    mainDiv.appendChild(hsButtons);
+
+    var backButton = document.createElement("BUTTON");
+    backButton.innerHTML = "Go Back";
+    backButton.setAttribute("id", "back");
+    backButton.addEventListener("click", goToHomePage);
+    mainDiv.appendChild(backButton);
+
+    var clearButton = document.createElement("BUTTON");
+    clearButton.innerHTML = "Clear Highscores";
+    clearButton.setAttribute("id", "back");
+    clearButton.addEventListener("click", clearHighScore);
+    mainDiv.appendChild(clearButton);
+
+    hsButtons.appendChild(backButton);
+    hsButtons.appendChild(clearButton);
 }
 
 
- 
-// create questions here
+// Questions info
 var questions = [
-    new Question("Hyper Text Markup Language Stand For?", ["JavaScript", "XHTML","CSS", "HTML"], "HTML"),
-    new Question("Which language is used for styling web pages?", ["HTML", "JQuery", "CSS", "XML"], "CSS"),
-    new Question("Which is not a JavaScript Framework?", ["Python Script", "JQuery","Django", "NodeJS"], "Django"),
-    new Question("Which is used for Connect To Database?", ["PHP", "HTML", "JS", "All"], "PHP"),
-    new Question("Frogs are usually good at...", ["Web Design", "Graphic Design", "SEO & Development", "All"], "All")
+    new Question("What is the default behavior called that is used to move declarations to the top of the current scope?", ["Jumping", "Arranging","Sorting", "Hoisting"], "Hoisting"),
+    new Question("In JavaScript, what element is used to store and manipulate text, usually in multiples?", ["Variables", "Recorders", "Arrays", "Strings"], "Strings"),
+    new Question("What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?", ["Output Level", "Scope","Range", "Restriction"], "Scope"),
+    new Question("What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?", ["While Loop", "Else Loop", "Conditional Loop", "For Loop"], "While Loop"),
+    new Question("What is the name of the statement that is used to exit or end a loop?", ["Conditional statement", "Falter statement", "Close statement", "Break statement"], "Break statement")
 ];
  
-// create quiz
+// Create the quiz
 var quiz = new Quiz(questions);

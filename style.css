@@ -97,7 +97,7 @@ body {
     flex-direction: column;
 }
  
-#btn0, #btn1, #btn2, #btn3, #startB {
+#btn0, #btn1, #btn2, #btn3, #startB, #back {
     background-color: indigo;
     width: 250px;
     font-size: 20px;
@@ -106,13 +106,22 @@ body {
     padding: 10px 10px;
     border-radius: 5px;
 }
+
+#hsButtonContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#back  {
+    max-width: fit-content;
+}
  
-#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover, #startB:hover, #submit:hover {
+#btn0:hover, #btn1:hover, #btn2:hover, #btn3:hover, #startB:hover, #submit:hover, #back:hover{
     cursor: pointer;
     background-color:plum;
 }
  
-#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus, #startB:focus, #submit:focus {
+#btn0:focus, #btn1:focus, #btn2:focus, #btn3:focus, #startB:focus, #submit:focus, #back:focus{
     outline: 0;
 }
 
@@ -145,4 +154,15 @@ body {
 
 #form {
     max-width: 30%;
+}
+
+#score-board {
+    background-color: lavender;
+    max-width: 50%;
+    padding: 10px 10px;
+}
+
+#initials:focus {
+    outline: none !important;
+    border-color:lightskyblue;
 }
