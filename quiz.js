@@ -166,12 +166,6 @@ function saveScore() {
     finalScreen();
 }
 
-//return to home/startscreen
-function goToHomePage() {
-    history.go(-1); return false;
-    // document.location = './index.html'; 
-}
-
 //clear highscore when you press the "Clear Highscores" button
 function clearHighScore() {
     localStorage.clear();
