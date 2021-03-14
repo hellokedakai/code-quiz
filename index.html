@@ -8,33 +8,31 @@
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen"/>
 </head>
 <body>
-    <header class="top-row">
-        <div id="highscores" href="#">
+    <header class="top-row" id="top-row">
+        <div id="highscores">
             View high scores
         </div>
         <div id="time">Time: 0</div>
     </header>
+
     <main id="challenge">
         <h1 id="startH1">Coding Quiz challenge</h1>
         <p id="startP">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <div id="start-button-container">
-            <button id="startB" onClick="quizstart()">
+            <button id="startB">
                 Start Quiz
             </button>
         </div>
-        
         <div id="score-submit">
-            <input type="submit" id="submit" onClick = "saveScore()">
-            <input id="form" type="form" name = "initials">
+            <input type="submit" id="submit">
+            <input type="text" placeholder ="Type" id = "initials">
             <label for="initials" id="score-label">Enter initials: </label>
         </div>
 
         <footer id="footer">
             <p id="progress"></p>
         </footer>
-
     </main>
-
 
     <script src="quiz.js"></script>
 </body>
