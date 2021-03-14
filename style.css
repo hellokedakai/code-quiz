@@ -14,6 +14,10 @@ main{
     padding: 0 15% 5% 15%;
 }
 
+.top-row {
+    margin: 20px 20px;
+}
+
 
 #startH1, #startB, #start-button-container, #startP {
     display: flex;
@@ -57,32 +61,10 @@ body {
     align-items: center;
 }
  
-.grid {
-    width: 600px;
-    height: 500px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 10px 50px 50px 50px;
-    border: 2px solid #cbcbcb;
-    
-}
- 
-.grid h1 {
-    background-color: #01BBFF;
-    font-size: 60px;
-    text-align: center;
-    color: #ffffff;
-    padding: 2px 0px;
-    
-}
- 
 #score {
     display: flex;
     display: inline-block;
     text-align: left;
-    /* color: #01BBFF;
-    text-align: center;
-    font-size: 30px; */
 }
  
 #question {

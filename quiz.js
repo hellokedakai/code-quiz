@@ -168,7 +168,8 @@ function saveScore() {
 
 //return to home/startscreen
 function goToHomePage() {
-    document.location = './index.html'; 
+    history.go(-1); return false;
+    // document.location = './index.html'; 
 }
 
 //clear highscore when you press the "Clear Highscores" button
@@ -208,7 +209,7 @@ function finalScreen() {
     var backButton = document.createElement("BUTTON");
     backButton.innerHTML = "Go Back";
     backButton.setAttribute("id", "back");
-    backButton.addEventListener("click", goToHomePage);
+    backButton.setAttribute("onclick", "location.reload(true)");
     mainDiv.appendChild(backButton);
 
     var clearButton = document.createElement("BUTTON");
