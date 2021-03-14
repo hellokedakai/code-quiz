@@ -168,7 +168,7 @@ function saveScore() {
 
 //return to home/startscreen
 function goToHomePage() {
-    window.location = '/'; 
+    document.location = './index.html'; 
 }
 
 //clear highscore when you press the "Clear Highscores" button
